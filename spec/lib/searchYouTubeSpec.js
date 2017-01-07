@@ -56,18 +56,18 @@ describe('searchYouTube', function() {
   });
 
   it('should accept `key`, `query`, and `max` options and send them in GET request', function() {
-    searchYouTube({ key: 'API_KEY', query: 'cats', max: 10 }, () => {});
+    searchYouTube({ key: 'API_KEY', q: 'cats', maxResults: 10 }, () => {});
     
     var params = getURLSearchParams(requests[0].url);
 
     expect(params.key).to.equal('API_KEY');
-    expect(params.query).to.equal('cats');
-    expect(params.max).to.equal('10');
+    expect(params.q).to.equal('cats');
+    expect(params.maxResults).to.equal('10');
   });
 
   // Same shape means that the data should have the same keys, nested the same way as `exampleVideoData`,
   // though it will not necessarily have the same values.
-  xit('should GET videos with the same shape as `exampleVideoData`', function(done) {
+  it('should GET videos with the same shape as `exampleVideoData`', function(done) {
     var options = {
       key: window.YOUTUBE_API_KEY,
       query: 'react',

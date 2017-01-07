@@ -7,23 +7,26 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this);
-    var success = this.setState.bind(this);
+  setStateOfVideos(dataItems) {
+    this.setState({videos: dataItems, curVideo: dataItems[0]});
+  }
+
+  search(searchString) {
     this.props.searchYouTube({
       key: window.YOUTUBE_API_KEY,
-      query: 'react',
-      max: 5
-    }, (data) => {
-      // debugger;
-      success({'videos': data.items});
-    });
+      q: searchString,
+      maxResults: 5
+    }, this.setStateOfVideos.bind(this));
+  }
+
+  componentDidMount() {
+    this.search('react');
   }
 
   render() {
     return (
       <div>
-        <Nav />
+        <Nav search={this.search.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.curVideo}/>
         </div>
