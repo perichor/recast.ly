@@ -7,15 +7,18 @@ class Search extends React.Component {
   }
 
   setSearchString(event) {
-    // this.setState({searchString: event.target.value});
-    this.props.search(event.target.value);
+    this.setState({searchString: event.target.value});
+    this.props.search(this.state.searchString);
   } 
 
+  searchWrapper() {
+    this.props.search(this.state.searchString);
+  }
   render() {
     return (
       <div className="search-bar form-inline">
         <input className="form-control" type="text" onChange={this.setSearchString.bind(this)}/>
-        <button className="btn hidden-sm-down">
+        <button className="btn hidden-sm-down" onClick={this.searchWrapper.bind(this)}>
           <span className="glyphicon glyphicon-search"></span>
         </button>
       </div> 
